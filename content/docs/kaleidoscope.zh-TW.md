@@ -17,6 +17,12 @@ Kaleidoscope 是 Windows 的圖形啟動器。它讓 stable 或 lazer 連到你�
 - 只有七項登入資料另外保存，位於同一資料夾的 `auth.illyaverse.json`，並依伺服器來源區分：`Username`、`Token`、`SaveUsername`、`SavePassword`、`WasSupporter`、`UserOnlineStatus`、`PMFriendsOnly`。切換伺服器絕不會沿用另一個伺服器的 token。
 - 同一個 lazer 資料夾同時只支援一個遊戲。啟動器會先關閉所選安裝，並拒絕其他偵測到的 lazer 程序。
 
+## Linux
+
+啟動器也能在 Linux x64 上執行，僅支援 lazer。它用遊戲自己的 `libhostfxr.so` 載入已安裝的遊戲、透過 `/proc` 追蹤程序，資料放在 `$XDG_DATA_HOME`（`~/.local/share`）。請選擇 lazer 的 `osu.AppImage`（先用 `chmod +x` 設為可執行）；它會被解壓縮一次到啟動器的私有資料夾，也可以直接選擇已解壓縮的安裝。不支援 osu!stable。只接受 lazer 2026.1005.1-tachyon（linux-x64），圖形介面需要 GTK 3 與 WebKitGTK 4.1。
+
+這個版本仍是實驗性質。載入程式（hostfxr 與 startup hook）與程序處理在 Linux 上有測試涵蓋，但尚未用真實的遊戲跑過。
+
 ## 清理
 
 遊戲正常結束後，獨立的監護程序會移除它放入的橋接 DLL，但只在檔案未被更動且仍可辨識時才刪除。當機或斷電後，開啟啟動器會顯示復原結果；若有殘留，使用「重試清理」。它不會刪除未知的 ruleset。`rulesets` 裡的 `.kaleidoscope.lock` 是刻意保留的互斥鎖，不代表遊戲正在執行。
@@ -31,6 +37,6 @@ Kaleidoscope 是 Windows 的圖形啟動器。它讓 stable 或 lazer 連到你�
 
 腳本會內嵌正式版網頁介面、組裝橋接，並驗證目錄與 ZIP 雜湊。它不會啟動遊戲。
 
-推送 `v0.2.0` 這類 tag 到 Kaleidoscope repository 會執行 `release.yml`：在 GitHub 託管的 runner 上建置 Windows x64 的免安裝 ZIP，並連同 `SHA256SUMS.txt` 發布（未簽署）。Transfiguration 橋接不在那裡編譯；請先在 `bridge-release.json` 固定一個已發布的 Transfiguration release（版本與壓縮檔 SHA-256）。啟動器只支援 Windows。預設伺服器網址是 `https://shdcloud.top`，可在設定中更改。
+推送 `v0.2.0` 這類 tag 到 Kaleidoscope repository 會執行 `release.yml`：在 GitHub 託管的 runner 上建置 Windows x64 的免安裝 ZIP 與 Linux x64 的 tarball，並連同 `SHA256SUMS.txt` 發布（未簽署）。Transfiguration 橋接不在那裡編譯；請先在 `bridge-release.json` 固定一個已發布的 Transfiguration release（版本與壓縮檔 SHA-256）。預設伺服器網址是 `https://shdcloud.top`，可在設定中更改。
 
 有簽署、經審閱的 Release 則透過專用 Windows runner（`[self-hosted, Windows, X64, illyaverse-native]`）上的手動 CI 產出：啟動器用本 repository 的 `build-kaleidoscope.yml`，橋接用 Transfiguration 的 `build-production.yml`。兩個 workflow 都是唯讀，需要受保護環境的審核者，會檢查 checkout 與派送的 commit 一致，並上傳含來源證明的建置輸入。發布是另一個步驟。runner 需要 Git、Node.js 24、.NET 10 SDK、含 Windows SDK 的 MSVC，以及 `x86_64-pc-windows-msvc` 的 Rust 工具鏈。
