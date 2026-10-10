@@ -1,0 +1,32 @@
+---
+title: Illyaverse operator docs
+description: How to deploy, configure and run your own Illyaverse osu! community server.
+---
+
+These pages are for **server operators**. Players should use the in-site connection guide and player help.
+
+## Components
+
+| Name              | Role                                           |
+| ----------------- | ---------------------------------------------- |
+| Serendipity       | Website (Next.js)                              |
+| Sanctuary         | Website API, accounts, scores, beatmaps (Rust) |
+| Resonance         | osu! stable and lazer protocol gateway (Rust)  |
+| Kaleidoscope      | Launcher players use to connect                |
+| Transfiguration   | Bridge Kaleidoscope loads into lazer           |
+| PostgreSQL, Caddy | Database, reverse proxy with automatic HTTPS   |
+
+## Start here
+
+1. [Quickstart](./quickstart.mdx): run everything locally.
+2. [Deployment](./deployment.md): your own domain and HTTPS.
+3. [Configuration](./configuration.md): every environment variable.
+4. [Backup and restore](./backup-and-restore.md): before you upgrade anything.
+5. [Connecting players](./connecting-players.md): what players need and what you must provide.
+6. [Status](./status.md): what is verified and what is still being tested.
+
+<Callout type="warn">
+  Sign-in, play, chat and score submission have been verified on stable and
+  lazer. Multiplayer is partly verified and spectating is not. Test your chosen
+  client version before opening registration.
+</Callout>

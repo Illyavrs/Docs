@@ -1,0 +1,15 @@
+{
+  "title": "Illyaverse",
+  "pages": [
+    "index",
+    "quickstart",
+    "deployment",
+    "configuration",
+    "backup-and-restore",
+    "architecture",
+    "permissions",
+    "connecting-players",
+    "kaleidoscope",
+    "status"
+  ]
+}

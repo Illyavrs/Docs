@@ -1,0 +1,47 @@
+---
+title: Quickstart
+description: Run the full stack locally with Docker in a few minutes.
+---
+
+## Requirements
+
+- Docker with Compose 2.24.4 or newer
+- Port 3000 free on the host
+
+## Start
+
+<Tabs items={['Windows', 'Linux / macOS']}>
+<Tab value="Windows">
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File infra/setup.ps1
+docker compose up -d --build --wait
+docker compose ps
+```
+
+</Tab>
+<Tab value="Linux / macOS">
+
+```sh
+sh infra/setup.sh
+docker compose up -d --build --wait
+docker compose ps
+```
+
+</Tab>
+</Tabs>
+
+`setup` writes independent random secrets to `.env`. It never prints them and never overwrites an existing file. Then open [http://localhost:3000](http://localhost:3000).
+
+## First administrator
+
+The initial administrator comes from `BOOTSTRAP_ADMIN_USERNAME` and `BOOTSTRAP_ADMIN_PASSWORD` in `.env`. After signing in, clear all three `BOOTSTRAP_ADMIN_*` values and recreate Sanctuary:
+
+```sh
+docker compose up -d --force-recreate sanctuary
+```
+
+## Next
+
+- Public domain with HTTPS: [Deployment](./deployment.md).
+- Let players download the launcher: set `KALEIDOSCOPE_DOWNLOAD_URL` ([Configuration](./configuration.md)).

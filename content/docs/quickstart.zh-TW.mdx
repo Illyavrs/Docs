@@ -1,0 +1,47 @@
+---
+title: 快速開始
+description: 用 Docker 在幾分鐘內於本機啟動完整服務。
+---
+
+## 需求
+
+- Docker，Compose 2.24.4 以上
+- 主機的 3000 連接埠未被佔用
+
+## 啟動
+
+<Tabs items={['Windows', 'Linux / macOS']}>
+<Tab value="Windows">
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File infra/setup.ps1
+docker compose up -d --build --wait
+docker compose ps
+```
+
+</Tab>
+<Tab value="Linux / macOS">
+
+```sh
+sh infra/setup.sh
+docker compose up -d --build --wait
+docker compose ps
+```
+
+</Tab>
+</Tabs>
+
+`setup` 會把彼此獨立的隨機密鑰寫入 `.env`，不會列印，也不會覆蓋既有檔案。接著開啟 [http://localhost:3000](http://localhost:3000)。
+
+## 第一位管理員
+
+初始管理員帳號來自 `.env` 的 `BOOTSTRAP_ADMIN_USERNAME` 與 `BOOTSTRAP_ADMIN_PASSWORD`。登入後，請清空三項 `BOOTSTRAP_ADMIN_*` 並重新建立 Sanctuary：
+
+```sh
+docker compose up -d --force-recreate sanctuary
+```
+
+## 接下來
+
+- 使用公開網域與 HTTPS：[部署](./deployment.md)。
+- 讓玩家下載啟動器：設定 `KALEIDOSCOPE_DOWNLOAD_URL`（見[設定](./configuration.md)）。

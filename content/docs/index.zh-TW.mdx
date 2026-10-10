@@ -1,0 +1,31 @@
+---
+title: Illyaverse 管理員文件
+description: 如何部署、設定並營運你自己的 Illyaverse osu! 社群伺服器。
+---
+
+這些頁面寫給**伺服器管理員**。玩家請使用網站內的連線教學與玩家說明。
+
+## 元件
+
+| 名稱              | 角色                                        |
+| ----------------- | ------------------------------------------- |
+| Serendipity       | 網站（Next.js）                             |
+| Sanctuary         | 網站 API、帳號、成績、圖譜（Rust）          |
+| Resonance         | osu! stable 與 lazer 的遊戲協定閘道（Rust） |
+| Kaleidoscope      | 玩家用來連線的啟動器                        |
+| Transfiguration   | Kaleidoscope 載入 lazer 的連線橋接          |
+| PostgreSQL、Caddy | 資料庫、自動 HTTPS 的反向代理               |
+
+## 從這裡開始
+
+1. [快速開始](./quickstart.mdx)：在本機跑起整套服務。
+2. [部署](./deployment.md)：使用自己的網域與 HTTPS。
+3. [設定](./configuration.md)：全部環境變數。
+4. [備份與還原](./backup-and-restore.md)：升級任何東西之前先做。
+5. [讓玩家連線](./connecting-players.md)：玩家需要什麼、你必須提供什麼。
+6. [狀態](./status.md)：哪些已驗證、哪些仍在測試。
+
+<Callout type="warn">
+  登入、遊玩、聊天與成績提交已在 stable 與 lazer
+  驗證。多人遊戲部分驗證，觀戰尚未驗證。開放註冊前，請先測試你選定的客戶端版本。
+</Callout>
