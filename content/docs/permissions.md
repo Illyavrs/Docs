@@ -32,6 +32,10 @@ The admin panel shows the areas an account has permission for (for example `chat
 - Restricting an account needs `users.moderate`; restricting one with `*` also needs `*`, and nobody can restrict themselves.
 - `beatmap_nominator` has chat, upload, import, moderate, request and review permissions only. Role names carry no authority.
 
+## Role badges
+
+A role can show as a coloured badge on profiles, like groups on osu-web. In the role form, tick **Show this role as a badge**, give it a short label of up to 8 characters (for example `MOD` or `DEV`) and pick a colour. The badge appears under the player's name on the website and in the lazer profile; hovering shows the full role name. Roles that are not marked as badges, such as `player`, stay hidden. Built-in `moderator` and `administrator` start with `MOD` and `ADMIN` badges; their colours and labels can be changed, but the administrator name and permissions cannot.
+
 ## Beatmap statuses and rank requests
 
 Status belongs to each difficulty: Graveyard, WIP, Pending, Unranked, Ranked or Loved. New uploads start in Graveyard. Ranking one difficulty never changes its siblings.
