@@ -19,7 +19,7 @@ The admin panel shows the areas an account has permission for (for example `chat
 | `beatmaps.rank.request`              | Submit rank requests                                                                |
 | `beatmaps.rank.review`               | See the request queue and reject requests (approval also needs `beatmaps.moderate`) |
 | `beatmaps.upload`, `beatmaps.import` | Upload server beatmaps; import from the official site                               |
-| `scores.moderate`                    | Review scores and recalculate Relax pp (bounded API)                                |
+| `scores.moderate`                    | Review scores; recalculate pp one by one or in bulk from the admin Recalculate tab  |
 | `announcements.manage`               | Draft, edit, publish and archive announcements                                      |
 | `audit.read`                         | Read the admin action log                                                           |
 | `chat.send`, `social.manage`         | Send chat; manage own friends and blocks                                            |
@@ -45,6 +45,7 @@ Players can request ranking for their own unranked uploads and for official Pend
 ## Other moderation
 
 - **Scores**: reviews carry an expected `moderation_revision`; a stale review returns 409 `score_moderation_conflict`.
+- **Score recalculation**: the admin **Recalculate** tab recomputes pp for stored scores. Filter by player (name or ID), Normal or Relax, ruleset, date range, beatmap ID, review status, current pp range or explicit score IDs, and optionally only scores calculated with an older method. Preview shows the count, a split by type and ruleset, and the newest matches before anything changes. A job then runs in the background, one at a time, and can be cancelled; scores already processed keep their new pp. Each job lists the largest pp changes and every skipped or failed score. Failed and rejected scores and restricted players are never recalculated. Every score records the calculation method it used, which is how "older method" is detected. Starting, cancelling and finishing a job are audited, and a job stops if its operator loses `scores.moderate`.
 - **Chat silence**: a future time up to 30 days and a 1 to 500 character reason (private, audit only). It only blocks new messages; the player can still sign in, play and read.
 - **Sign-in revocation**: does not restrict the account. Long-lived connections notice at their next authentication check.
 - **Announcements**: edits carry the current `revision`; a mismatch returns 409 `announcement_conflict`. Drafts and archived items are never served publicly.
