@@ -31,4 +31,6 @@ Kaleidoscope 是 Windows 的圖形啟動器。它讓 stable 或 lazer 連到你�
 
 腳本會內嵌正式版網頁介面、組裝橋接，並驗證目錄與 ZIP 雜湊。它不會啟動遊戲。
 
-Release 建置透過專用 Windows runner（`[self-hosted, Windows, X64, illyaverse-native]`）上的手動 CI 產出：啟動器用本 repository 的 `build-kaleidoscope.yml`，橋接用 Transfiguration 的 `build-production.yml`。兩個 workflow 都是唯讀，需要受保護環境的審核者，會檢查 checkout 與派送的 commit 一致，並上傳含來源證明的建置輸入。發布是另一個步驟。runner 需要 Git、Node.js 24、.NET 10 SDK、含 Windows SDK 的 MSVC，以及 `x86_64-pc-windows-msvc` 的 Rust 工具鏈。
+推送 `v0.2.0` 這類 tag 到 Kaleidoscope repository 會執行 `release.yml`：在 GitHub 託管的 runner 上建置 Windows x64 的免安裝 ZIP，並連同 `SHA256SUMS.txt` 發布（未簽署）。Transfiguration 橋接不在那裡編譯；請先在 `bridge-release.json` 固定一個已發布的 Transfiguration release（版本與壓縮檔 SHA-256）。啟動器只支援 Windows。預設伺服器網址是 `https://shdcloud.top`，可在設定中更改。
+
+有簽署、經審閱的 Release 則透過專用 Windows runner（`[self-hosted, Windows, X64, illyaverse-native]`）上的手動 CI 產出：啟動器用本 repository 的 `build-kaleidoscope.yml`，橋接用 Transfiguration 的 `build-production.yml`。兩個 workflow 都是唯讀，需要受保護環境的審核者，會檢查 checkout 與派送的 commit 一致，並上傳含來源證明的建置輸入。發布是另一個步驟。runner 需要 Git、Node.js 24、.NET 10 SDK、含 Windows SDK 的 MSVC，以及 `x86_64-pc-windows-msvc` 的 Rust 工具鏈。
