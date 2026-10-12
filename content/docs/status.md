@@ -14,6 +14,7 @@ Passing automated tests is not the same as working in a real game client. This p
 ## Covered by automated tests only
 
 - stable encrypted score submission and replay binding.
+- Player replay resubmission: bounded `.osr` parsing and decompression, account and map binding, atomic private replay storage, idempotent retries and mandatory staff review. Offline lazer IDs are accepted only by the manual-review parser; native publication continues to require strict identity binding. These summaries are claims, not gameplay verification. Failed native replay accuracy falls back to legacy judgement counters when the partial maximum cannot be reconstructed. Resubmissions retain stable/lazer client identity and separate `submission_origin=replay`; normal native publication cannot approve them.
 - Relax (RX) partitions, pp calculation and score conversion.
 - Room score tokens, rounds and recovery after restart.
 - Launcher guard, cleanup and compatibility rejection.
