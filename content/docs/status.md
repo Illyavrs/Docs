@@ -13,6 +13,8 @@ Passing automated tests is not the same as working in a real game client. This p
 
 ## Covered by automated tests only
 
+- Weekly Stardust rewards: database/router tests cover eligibility, replay play-time bounds, once-per-week claims, concurrent purchase accounting, retry idempotency, catalog revisions, ownership, authorization revocation and audit rollback. Browser tests cover missions, exchange, equipment, public profile cosmetics, management, account isolation and English/Traditional Chinese/Japanese phone layouts. Three weekly missions pay 20 Stardust each; the week begins Monday 00:00 Asia/Taipei. Staff with `rewards.manage` manage the initially empty catalog. Titles and geometric avatar frames have no gameplay effects. Deployment and rewards earned through real stable/lazer sessions remain pending.
+
 - stable encrypted score submission and replay binding.
 - Markdown/BBCode format persistence for biographies, announcements and nomination/review reasons, including safe rendering and visual/source/preview editing. Raw HTML is not executed and remote images are not automatically loaded. Existing content defaults to Markdown. User renames use a seven-day cooldown; staff exemption and 90-day old-name reservations remain unchanged.
 - Historical official difficulty imports may omit `BeatmapID` and `BeatmapSetID`. Only the authenticated official API plus an exact original-file checksum and matching ruleset establish the canonical IDs in that case. Supplied IDs, including malformed or mismatched values, remain strictly checked. Original `.osu` bytes are never rewritten. Covered by resolver integration tests; affected real-client plays require deployment verification.

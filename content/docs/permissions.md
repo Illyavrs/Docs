@@ -21,6 +21,7 @@ The admin panel shows the areas an account has permission for (for example `chat
 | `beatmaps.upload`, `beatmaps.import` | Upload server beatmaps; import from the official site                               |
 | `scores.moderate`                    | Review scores; recalculate pp one by one or in bulk from the admin Recalculate tab  |
 | `announcements.manage`               | Draft, edit, publish and archive announcements                                      |
+| `rewards.manage`                     | Create, edit, publish, unpublish and remove unpurchased reward items                 |
 | `audit.read`                         | Read the admin action log                                                           |
 | `chat.send`, `social.manage`         | Send chat; manage own friends and blocks                                            |
 
@@ -49,5 +50,6 @@ Players can request ranking for their own unranked uploads and for official Pend
 - **Chat silence**: a future time up to 30 days and a 1 to 500 character reason (private, audit only). It only blocks new messages; the player can still sign in, play and read.
 - **Sign-in revocation**: does not restrict the account. Long-lived connections notice at their next authentication check.
 - **Announcements**: edits carry the current `revision`; a mismatch returns 409 `announcement_conflict`. Drafts and archived items are never served publicly.
+- **Rewards**: `rewards.manage` opens the reward catalog tools. Staff can create and edit titles and avatar frames, publish or unpublish them, and delete an item only if nobody has purchased it. If deletion returns `reward_in_use`, unpublish the item instead. Unpublishing a purchased item stops new purchases; owners can still equip it. Prices are 1 to 100,000 Stardust and title text is 1 to 32 characters. Descriptions are plain text. Frames use the built-in line, double and corners border styles. The catalog starts empty; staff publish the items they choose. This permission does not grant access to another player's private wallet or inventory.
 
 Every admin write re-reads the actor's sign-in, restriction and permissions inside its transaction and commits together with its audit record.
