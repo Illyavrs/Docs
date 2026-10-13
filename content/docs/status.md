@@ -13,7 +13,8 @@ Passing automated tests is not the same as working in a real game client. This p
 
 ## Covered by automated tests only
 
-- Weekly Stardust rewards: database/router tests cover eligibility, replay play-time bounds, once-per-week claims, concurrent purchase accounting, retry idempotency, catalog revisions, ownership, authorization revocation and audit rollback. Browser tests cover missions, exchange, equipment, public profile cosmetics, management, account isolation and English/Traditional Chinese/Japanese phone layouts. Three weekly missions pay 20 Stardust each; the week begins Monday 00:00 Asia/Taipei. Staff with `rewards.manage` manage the initially empty catalog. Titles and geometric avatar frames have no gameplay effects. Deployment and rewards earned through real stable/lazer sessions remain pending.
+- Weekly Stardust rewards: database/router tests cover eligibility, replay play-time bounds, once-per-week claims, concurrent purchase accounting, retry idempotency, catalog revisions, ownership, authorization revocation and audit rollback. Browser tests cover missions, exchange, equipment, public profile/player-card cosmetics, management, account isolation and English/Traditional Chinese/Japanese phone layouts. Three weekly missions pay 20 Stardust each; the week begins Monday 00:00 Asia/Taipei. Staff with `rewards.manage` manage the initially empty catalog. Titles and avatar frames have no gameplay effects. Deployment and rewards earned through real stable/lazer sessions remain pending.
+- Website identity previews and uploaded frame artwork: public player-card lookups expose only presentation fields and equipped cosmetics, with batches bounded to 60 supplied IDs and restricted players omitted. Desktop avatar/name links open a cursor-adjacent card after a short hover; touch links navigate directly. Frame uploads require `rewards.manage`, a matching revision and a bounded static transparent PNG/WebP; canonical immutable PNGs preserve alpha. Browser tests cover hover timing, edge placement, stale responses, interaction, touch navigation and shared-avatar rendering; PostgreSQL tests cover public privacy, image validation, revision races, authorization and rollback. Real deployment verification remains pending.
 
 - stable encrypted score submission and replay binding.
 - Markdown/BBCode format persistence for biographies, announcements and nomination/review reasons, including safe rendering and visual/source/preview editing. Raw HTML is not executed and remote images are not automatically loaded. Existing content defaults to Markdown. User renames use a seven-day cooldown; staff exemption and 90-day old-name reservations remain unchanged.
@@ -35,7 +36,7 @@ Passing automated tests is not the same as working in a real game client. This p
 
 - The launcher package is an **unsigned Debug build**. A signed Release build, a published release, signing keys and independent update feeds for the launcher and bridge are still to do.
 - Release builds of the Rust workspace on Windows currently fail with a build-script error (Windows error 5, cause unknown). Debug builds and the Docker images are unaffected.
-- Source has not been pushed to GitHub and a fresh recursive clone has not been tested.
+- Source is available on GitHub; verification from a fresh recursive clone remains pending.
 
 ## Reporting a problem
 
